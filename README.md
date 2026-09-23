@@ -5,6 +5,12 @@
 </p>
 
 <p align="center">
+  <a href="https://manikar984.github.io/animated-photography-website/">
+    <img src="https://img.shields.io/badge/LIVE%20DEMO-VISIT%20WEBSITE-d8ff35?style=for-the-badge&logo=googlechrome&logoColor=080808&labelColor=080808" alt="Live Demo" />
+  </a>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/WebGL-Three.js_r128-000000?style=for-the-badge&logo=three.js&logoColor=white" alt="Three.js" />
   <img src="https://img.shields.io/badge/Motion-GSAP_3.12-88CE02?style=for-the-badge&logo=greensock&logoColor=white" alt="GSAP" />
   <img src="https://img.shields.io/badge/Physics-Lenis_Scroll-111111?style=for-the-badge" alt="Lenis" />
@@ -12,6 +18,13 @@
   <img src="https://img.shields.io/badge/Styling-Tailwind_CSS-38bdf8?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
   <img src="https://img.shields.io/badge/License-MIT-d8ff35?style=for-the-badge&labelColor=080808" alt="License: MIT" />
 </p>
+
+---
+
+## 🔗 Live Experience
+
+Experience the live interactive build directly in your browser:  
+👉 **[https://manikar984.github.io/animated-photography-website/](https://manikar984.github.io/animated-photography-website/)**
 
 ---
 
@@ -88,5 +101,5 @@ Because the project utilizes WebGL shaders and the Web Audio API, modern browser
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/your-username/noir-frame-studio.git](https://github.com/your-username/noir-frame-studio.git)
-cd noir-frame-studio
+git clone [https://github.com/manikar984/animated-photography-website.git](https://github.com/manikar984/animated-photography-website.git)
+cd animated-photography-website
