@@ -2,7 +2,7 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>NOIR / FRAME — Haute Photography & Creative Studio</title>
 
   <!-- Typography -->
@@ -23,6 +23,14 @@
     tailwind.config = {
       theme: {
         extend: {
+          screens: {
+            'xs': '420px',
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
+            '2xl': '1536px'
+          },
           colors: {
             noir: {
               950: '#040404',
@@ -110,7 +118,7 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* Precision Zero-Lag Cursor */
+    /* Precision Zero-Lag Cursor (Desktop Only) */
     .custom-cursor {
       position: fixed;
       top: 0;
@@ -160,8 +168,8 @@
     }
 
     body.viewing-project .cursor-ring {
-      width: 100px;
-      height: 100px;
+      width: 90px;
+      height: 90px;
       background-color: var(--accent);
       border-color: var(--accent);
       mix-blend-mode: normal;
@@ -174,7 +182,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       font-family: 'DM Mono', monospace;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.1em;
       color: var(--black);
@@ -219,7 +227,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 3rem;
+      padding: clamp(1.5rem, 5vw, 3.5rem);
       pointer-events: auto;
     }
 
@@ -256,11 +264,9 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* ==========================================================
-       SMOOTH MORPHING INDEX -> CLOSE WITH 'X' ICON
-       ========================================================== */
+    /* Morphing Menu Icon */
     .menu-icon-box {
-      width: 28px;
+      width: 26px;
       height: 18px;
       position: relative;
       display: flex;
@@ -290,7 +296,7 @@
       width: 100%;
     }
 
-    /* Active Morph to smooth Neon 'X' */
+    /* Active Morph to Neon 'X' */
     #menu-btn.is-active .menu-icon-box .line-top {
       transform: translateY(8px) rotate(45deg);
       background-color: var(--accent);
@@ -310,9 +316,7 @@
       color: var(--accent);
     }
 
-    /* ==========================================================
-       DRAWING BOARD SHEET & DYNAMIC PHOTO REVEAL
-       ========================================================== */
+    /* Drawing Board Sheet Layer */
     .drawing-board-layer {
       position: fixed;
       inset: 0;
@@ -334,8 +338,8 @@
 
     .drawing-sheet {
       position: relative;
-      width: min(1220px, 92vw);
-      height: min(740px, 82vh);
+      width: min(1220px, 94vw);
+      height: min(760px, 86vh);
       background-color: #faf8f3;
       box-shadow: 0 40px 100px -25px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.15);
       border-radius: 4px;
@@ -344,7 +348,7 @@
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Precision Technical Blueprint Grid */
+    /* Technical Blueprint Grid */
     .drawing-sheet::before {
       content: "";
       position: absolute;
@@ -352,7 +356,7 @@
       background-image: 
         linear-gradient(to right, rgba(0, 0, 0, 0.055) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(0, 0, 0, 0.055) 1px, transparent 1px);
-      background-size: 26px 26px;
+      background-size: 24px 24px;
       z-index: 1;
       pointer-events: none;
     }
@@ -360,39 +364,39 @@
     /* Drafting Tape Pins */
     .sheet-pin {
       position: absolute;
-      width: 48px;
-      height: 20px;
+      width: clamp(32px, 5vw, 48px);
+      height: clamp(14px, 2vw, 20px);
       background: rgba(255, 255, 255, 0.85);
       border: 1px solid rgba(0, 0, 0, 0.12);
       box-shadow: 0 3px 8px rgba(0,0,0,0.12);
       z-index: 10;
       backdrop-filter: blur(4px);
     }
-    .sheet-pin.tl { top: -6px; left: 26px; transform: rotate(-10deg); }
-    .sheet-pin.tr { top: -6px; right: 26px; transform: rotate(12deg); }
-    .sheet-pin.bl { bottom: -6px; left: 26px; transform: rotate(8deg); }
-    .sheet-pin.br { bottom: -6px; right: 26px; transform: rotate(-11deg); }
+    .sheet-pin.tl { top: -4px; left: clamp(12px, 3vw, 26px); transform: rotate(-10deg); }
+    .sheet-pin.tr { top: -4px; right: clamp(12px, 3vw, 26px); transform: rotate(12deg); }
+    .sheet-pin.bl { bottom: -4px; left: clamp(12px, 3vw, 26px); transform: rotate(8deg); }
+    .sheet-pin.br { bottom: -4px; right: clamp(12px, 3vw, 26px); transform: rotate(-11deg); }
 
-    /* Paper Blueprint Architecture Information */
+    /* Paper Blueprint Architecture Text */
     .sketch-wireframe {
       position: absolute;
-      inset: 28px;
+      inset: clamp(14px, 2.5vw, 28px);
       border: 1px dashed rgba(0, 0, 0, 0.2);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 24px;
+      padding: clamp(12px, 2vw, 24px);
       font-family: 'DM Mono', monospace;
       color: rgba(0,0,0,0.45);
-      font-size: 11px;
+      font-size: clamp(9px, 1.2vw, 11px);
       text-transform: uppercase;
       z-index: 2;
     }
 
-    /* Photo that manifests on top of paper */
+    /* Photo reveal on paper */
     .drawing-photo-reveal {
       position: absolute;
-      inset: 28px;
+      inset: clamp(14px, 2.5vw, 28px);
       background-size: cover;
       background-position: center;
       filter: contrast(1.1) brightness(0.95);
@@ -405,7 +409,7 @@
 
     .drawing-photo-reveal.is-active {
       opacity: 1;
-      clip-path: circle(140% at var(--sheet-x, 50%) var(--sheet-y, 50%));
+      clip-path: circle(150% at var(--sheet-x, 50%) var(--sheet-y, 50%));
     }
 
     /* Custom Scrollbar */
@@ -423,12 +427,37 @@
       background: var(--accent);
     }
 
-    @media (pointer: coarse) {
+    /* ==========================================================
+       RESPONSIVE ADAPTATIONS: MOBILE, TABLET & TOUCH SCREENS
+       ========================================================== */
+    @media (pointer: coarse), (max-width: 1024px) {
       body {
-        cursor: auto;
+        cursor: auto !important;
       }
-      .custom-cursor, .cursor-ring {
+      .custom-cursor, .cursor-ring, .project-floating-preview {
         display: none !important;
+      }
+      .tilt-card {
+        transform: none !important;
+      }
+      .drawing-sheet {
+        transform: rotate(0deg);
+      }
+    }
+
+    /* Phone Specific Tweaks (<= 640px) */
+    @media (max-width: 640px) {
+      .drawing-photo-reveal {
+        clip-path: none !important;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+      .drawing-photo-reveal.is-active {
+        opacity: 0.95;
+      }
+      .nav-link {
+        font-size: clamp(2rem, 9vw, 3.5rem) !important;
+        line-height: 1.1 !important;
       }
     }
   </style>
@@ -442,7 +471,7 @@
   <!-- Noise Film Grain -->
   <div class="film-grain"></div>
 
-  <!-- Drawing Board Background Layer -->
+  <!-- Responsive Drawing Board Background Layer -->
   <div id="drawing-board-layer" class="drawing-board-layer">
     <div class="drawing-sheet" id="drawing-sheet">
       <div class="sheet-pin tl"></div>
@@ -452,49 +481,51 @@
 
       <!-- Architectural Drafting White Sheet -->
       <div class="sketch-wireframe">
-        <div class="flex justify-between items-center border-b border-black/10 pb-3">
-          <span class="font-bold tracking-wider">PLATE 04 // NOIR/FRAME EMULSION STUDY</span>
-          <span>SCALE 1:1.4 — DRAFTING BOARD 01</span>
+        <div class="flex justify-between items-center border-b border-black/10 pb-2 sm:pb-3">
+          <span class="font-bold tracking-wider truncate mr-2">PLATE 04 // NOIR ARCHIVE</span>
+          <span class="whitespace-nowrap">SCALE 1:1.4</span>
         </div>
-        <div class="flex flex-col justify-center items-center py-20 text-center">
-          <div class="border border-black/15 px-10 py-8 rounded-full mb-3 bg-white/40 backdrop-blur-sm">
-            <span class="block text-2xl font-serif text-black/60 italic">Analog Emulsion Print</span>
+        <div class="flex flex-col justify-center items-center py-8 sm:py-20 text-center my-auto">
+          <div class="border border-black/15 px-6 sm:px-10 py-4 sm:py-8 rounded-full mb-3 bg-white/50 backdrop-blur-sm">
+            <span class="block text-lg sm:text-2xl font-serif text-black/70 italic">Analog Emulsion Print</span>
           </div>
-          <span class="text-[10px] tracking-widest text-black/40">HOVER INDEX ITEMS TO EXPOSE PRINTS ON PAPER</span>
+          <span class="text-[9px] sm:text-[10px] tracking-widest text-black/50 hidden xs:inline">
+            <span class="hidden md:inline">HOVER</span><span class="md:hidden">TAP</span> INDEX ITEMS TO EXPOSE PRINTS
+          </span>
         </div>
-        <div class="flex justify-between items-center border-t border-black/10 pt-3 text-[10px]">
-          <span>RAW EMULSION: SILVER HALIDE ARCHIVE</span>
-          <span>STUDIO A / LOS ANGELES &bull; TOKYO</span>
+        <div class="flex justify-between items-center border-t border-black/10 pt-2 sm:pt-3 text-[9px] sm:text-[10px]">
+          <span>RAW EMULSION</span>
+          <span>LA &bull; TOKYO &bull; NYC</span>
         </div>
       </div>
 
-      <!-- Image that changes on hover over menu items -->
+      <!-- Exposed Photo on Paper -->
       <div class="drawing-photo-reveal" id="sheet-photo" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=2200&q=90');"></div>
     </div>
   </div>
 
-  <!-- Custom Inertia Cursor -->
+  <!-- Custom Inertia Cursor (Desktop) -->
   <div class="custom-cursor">
     <div class="cursor-dot"></div>
   </div>
   <div class="cursor-ring"></div>
 
-  <!-- Floating Image Preview Hover Layer -->
+  <!-- Floating Image Preview Hover Layer (Desktop) -->
   <div class="project-floating-preview" id="floating-preview">
     <img id="floating-preview-img" src="" alt="Project Preview">
   </div>
 
   <!-- Cinematic Interactive Preloader -->
   <div id="preloader" class="preloader">
-    <div class="flex justify-between items-start font-mono text-xs uppercase tracking-widest text-neutral-400">
+    <div class="flex justify-between items-start font-mono text-[10px] sm:text-xs uppercase tracking-widest text-neutral-400">
       <div class="flex items-center space-x-2">
         <span class="inline-block w-2 h-2 rounded-full bg-limeAccent animate-pulse"></span>
-        <span>NOIR / FRAME SYSTEM VER. 3.4</span>
+        <span>NOIR / FRAME &bull; RESPONSIVE V3.5</span>
       </div>
-      <div class="tracking-widest">BERLIN &bull; TOKYO &bull; NYC</div>
+      <div class="tracking-widest hidden sm:block">BERLIN &bull; TOKYO &bull; NYC</div>
     </div>
 
-    <div class="max-w-4xl">
+    <div class="max-w-4xl my-auto">
       <div class="overflow-hidden">
         <h1 class="text-4xl sm:text-7xl lg:text-9xl font-sans font-semibold tracking-tighter leading-none text-white loader-line">
           VISUALIZING
@@ -508,9 +539,9 @@
     </div>
 
     <div>
-      <div class="flex justify-between items-baseline font-mono text-xs uppercase text-neutral-400 mb-3">
-        <span>Compiling Shaders & Audio Assets</span>
-        <span id="loader-percent" class="text-white text-lg font-bold">00%</span>
+      <div class="flex justify-between items-baseline font-mono text-[10px] sm:text-xs uppercase text-neutral-400 mb-2 sm:mb-3">
+        <span>Initializing Optical Rig</span>
+        <span id="loader-percent" class="text-white text-base sm:text-lg font-bold">00%</span>
       </div>
       <div class="w-full h-[2px] bg-neutral-800 rounded-full overflow-hidden">
         <div id="loader-progress-bar" class="h-full bg-limeAccent w-0 transition-all duration-150 ease-out"></div>
@@ -518,15 +549,15 @@
     </div>
   </div>
 
-  <!-- Site Header -->
-  <header class="fixed top-0 left-0 w-full z-50 px-6 sm:px-12 py-7 flex justify-between items-center mix-blend-difference pointer-events-auto">
-    <a href="#hero" class="group flex items-center gap-3 magnetic-trigger">
-      <span class="w-3 h-3 bg-limeAccent rounded-full transition-transform duration-300 group-hover:scale-125"></span>
-      <span class="font-sans font-bold text-sm tracking-tight uppercase text-white">NOIR <span class="text-limeAccent font-mono">/</span> FRAME</span>
+  <!-- Site Header (Adaptive: Phone / Tablet / Desktop) -->
+  <header class="fixed top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-12 py-5 sm:py-7 flex justify-between items-center mix-blend-difference pointer-events-auto">
+    <a href="#hero" class="group flex items-center gap-2.5 sm:gap-3 magnetic-trigger">
+      <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-limeAccent rounded-full transition-transform duration-300 group-hover:scale-125"></span>
+      <span class="font-sans font-bold text-xs sm:text-sm tracking-tight uppercase text-white">NOIR <span class="text-limeAccent font-mono">/</span> FRAME</span>
     </a>
 
-    <!-- Center Coordinates Pill -->
-    <div class="hidden md:flex items-center gap-6 px-4 py-1.5 rounded-full border border-white/15 bg-noir-900/40 backdrop-blur-md font-mono text-[11px] text-neutral-300 uppercase tracking-wider">
+    <!-- Center Coordinates Pill (Monitor & Desktop Only) -->
+    <div class="hidden lg:flex items-center gap-6 px-4 py-1.5 rounded-full border border-white/15 bg-noir-900/40 backdrop-blur-md font-mono text-[11px] text-neutral-300 uppercase tracking-wider">
       <span class="flex items-center gap-1.5">
         <span class="w-1.5 h-1.5 rounded-full bg-limeAccent animate-ping"></span>
         <span>STUDIO LOCATIONS</span>
@@ -536,19 +567,19 @@
     </div>
 
     <!-- Right Controls -->
-    <div class="flex items-center gap-4 sm:gap-8">
+    <div class="flex items-center gap-3 sm:gap-6">
       <!-- Audio Toggle -->
-      <button id="audio-toggle" class="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-neutral-300 hover:text-limeAccent transition-colors px-3 py-1.5 rounded-full border border-white/10 hover:border-limeAccent/50 backdrop-blur-md">
-        <span class="sound-bars flex items-end gap-[2px] h-3 w-3">
+      <button id="audio-toggle" class="flex items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-widest text-neutral-300 hover:text-limeAccent transition-colors px-2.5 sm:px-3 py-1.5 rounded-full border border-white/10 hover:border-limeAccent/50 backdrop-blur-md">
+        <span class="sound-bars flex items-end gap-[2px] h-2.5 sm:h-3 w-2.5 sm:w-3">
           <span class="w-[2px] h-1.5 bg-current transition-all"></span>
           <span class="w-[2px] h-3 bg-current transition-all"></span>
           <span class="w-[2px] h-1 bg-current transition-all"></span>
         </span>
-        <span id="audio-status">SOUND [OFF]</span>
+        <span id="audio-status" class="hidden xs:inline">SOUND [OFF]</span>
       </button>
 
       <!-- Smooth Morphing INDEX to 'X' CLOSE Button -->
-      <button id="menu-btn" class="group flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-white magnetic-trigger focus:outline-none">
+      <button id="menu-btn" class="group flex items-center gap-2.5 sm:gap-3 font-mono text-xs uppercase tracking-widest text-white magnetic-trigger focus:outline-none p-1.5">
         <span class="menu-label transition-colors duration-300" id="menu-label-text">INDEX</span>
         <div class="menu-icon-box">
           <span class="icon-line line-top"></span>
@@ -559,46 +590,47 @@
     </div>
   </header>
 
-  <!-- Fullscreen Modern Navigation Overlay -->
-  <div id="nav-overlay" class="fixed inset-0 z-40 bg-noir-950/75 backdrop-blur-xl transform -translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] flex flex-col justify-between p-8 sm:p-16">
-    <div class="flex justify-between items-center pt-8 border-b border-white/10 pb-6 font-mono text-xs text-neutral-400">
+  <!-- Fullscreen Responsive Navigation Overlay -->
+  <div id="nav-overlay" class="fixed inset-0 z-40 bg-noir-950/85 backdrop-blur-2xl transform -translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] flex flex-col justify-between p-6 sm:p-10 lg:p-16 overflow-y-auto">
+    <div class="flex justify-between items-center pt-14 sm:pt-4 border-b border-white/10 pb-4 font-mono text-[10px] sm:text-xs text-neutral-400">
       <span>NAVIGATIONAL RADAR</span>
-      <span>ESTABLISHED 2019 — TOKYO & NYC</span>
+      <span class="hidden sm:inline">ESTABLISHED 2019 — TOKYO & NYC</span>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 my-auto z-10">
-      <div class="lg:col-span-8 flex flex-col space-y-1">
-        <a href="#hero" class="nav-link text-5xl sm:text-7xl lg:text-8xl font-sans font-bold tracking-tighter text-white hover:text-limeAccent hover:italic transition-all duration-300 inline-block w-fit" data-sheet-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=2200&q=90">
+    <!-- Responsive Navigation Links Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 my-auto py-6 z-10">
+      <div class="lg:col-span-8 flex flex-col space-y-1 sm:space-y-2">
+        <a href="#hero" class="nav-link text-4xl sm:text-6xl lg:text-8xl font-sans font-bold tracking-tighter text-white hover:text-limeAccent hover:italic transition-all duration-300 inline-block w-fit" data-sheet-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=2200&q=90">
           01 // HOME
         </a>
-        <a href="#studio" class="nav-link text-5xl sm:text-7xl lg:text-8xl font-sans font-bold tracking-tighter text-white hover:text-limeAccent hover:italic transition-all duration-300 inline-block w-fit" data-sheet-img="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=2200&q=90">
+        <a href="#studio" class="nav-link text-4xl sm:text-6xl lg:text-8xl font-sans font-bold tracking-tighter text-white hover:text-limeAccent hover:italic transition-all duration-300 inline-block w-fit" data-sheet-img="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=2200&q=90">
           02 // STUDIO
         </a>
-        <a href="#work" class="nav-link text-5xl sm:text-7xl lg:text-8xl font-sans font-bold tracking-tighter text-white hover:text-limeAccent hover:italic transition-all duration-300 inline-block w-fit" data-sheet-img="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=2200&q=90">
+        <a href="#work" class="nav-link text-4xl sm:text-6xl lg:text-8xl font-sans font-bold tracking-tighter text-white hover:text-limeAccent hover:italic transition-all duration-300 inline-block w-fit" data-sheet-img="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=2200&q=90">
           03 // PORTFOLIO
         </a>
-        <a href="#manifesto" class="nav-link text-5xl sm:text-7xl lg:text-8xl font-sans font-bold tracking-tighter text-white hover:text-limeAccent hover:italic transition-all duration-300 inline-block w-fit" data-sheet-img="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=2200&q=90">
+        <a href="#manifesto" class="nav-link text-4xl sm:text-6xl lg:text-8xl font-sans font-bold tracking-tighter text-white hover:text-limeAccent hover:italic transition-all duration-300 inline-block w-fit" data-sheet-img="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=2200&q=90">
           04 // PHILOSOPHY
         </a>
-        <a href="#services" class="nav-link text-5xl sm:text-7xl lg:text-8xl font-sans font-bold tracking-tighter text-white hover:text-limeAccent hover:italic transition-all duration-300 inline-block w-fit" data-sheet-img="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=2200&q=90">
+        <a href="#services" class="nav-link text-4xl sm:text-6xl lg:text-8xl font-sans font-bold tracking-tighter text-white hover:text-limeAccent hover:italic transition-all duration-300 inline-block w-fit" data-sheet-img="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=2200&q=90">
           05 // EXPERTISE
         </a>
-        <a href="#contact" class="nav-link text-5xl sm:text-7xl lg:text-8xl font-sans font-bold tracking-tighter text-white hover:text-limeAccent hover:italic transition-all duration-300 inline-block w-fit" data-sheet-img="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=2200&q=90">
+        <a href="#contact" class="nav-link text-4xl sm:text-6xl lg:text-8xl font-sans font-bold tracking-tighter text-white hover:text-limeAccent hover:italic transition-all duration-300 inline-block w-fit" data-sheet-img="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=2200&q=90">
           06 // INITIATE
         </a>
       </div>
 
-      <div class="lg:col-span-4 flex flex-col justify-end space-y-6 font-mono text-xs text-neutral-400 border-l border-white/10 pl-8">
+      <div class="lg:col-span-4 flex flex-col justify-end space-y-4 sm:space-y-6 font-mono text-xs text-neutral-400 border-t lg:border-t-0 lg:border-l border-white/10 pt-6 lg:pt-0 lg:pl-8">
         <div>
-          <span class="text-white block mb-2 font-bold tracking-wider">// COMMISSIONS</span>
-          <p class="leading-relaxed">Worldwide fashion campaigns, high-craft editorial, 3D volumetric scans, and brand storytelling.</p>
+          <span class="text-white block mb-1 sm:mb-2 font-bold tracking-wider">// COMMISSIONS</span>
+          <p class="leading-relaxed text-[11px] sm:text-xs">Worldwide fashion campaigns, high-craft editorial, 3D volumetric scans, and brand storytelling.</p>
         </div>
         <div>
-          <span class="text-white block mb-2 font-bold tracking-wider">// DIRECT INQUIRIES</span>
-          <a href="mailto:director@noirframe.studio" class="text-limeAccent hover:underline block text-sm">director@noirframe.studio</a>
-          <span class="text-neutral-500">+1 (310) 902-8419</span>
+          <span class="text-white block mb-1 sm:mb-2 font-bold tracking-wider">// DIRECT INQUIRIES</span>
+          <a href="mailto:director@noirframe.studio" class="text-limeAccent hover:underline block text-xs sm:text-sm">director@noirframe.studio</a>
+          <span class="text-neutral-500 text-[11px]">+1 (310) 902-8419</span>
         </div>
-        <div class="flex gap-4 pt-4 text-white">
+        <div class="flex gap-4 pt-2 text-white text-[11px]">
           <a href="#" class="hover:text-limeAccent transition-colors">INSTAGRAM</a>
           <a href="#" class="hover:text-limeAccent transition-colors">BEHANCE</a>
           <a href="#" class="hover:text-limeAccent transition-colors">VIMEO</a>
@@ -606,7 +638,7 @@
       </div>
     </div>
 
-    <div class="flex justify-between items-center border-t border-white/10 pt-6 font-mono text-xs text-neutral-500 z-10">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-t border-white/10 pt-4 font-mono text-[10px] sm:text-xs text-neutral-500 gap-2 z-10">
       <span>LAT 34.0522° N, LONG 118.2437° W</span>
       <span>CLICK CLOSE [X] OR SELECT DESTINATION</span>
     </div>
@@ -616,51 +648,57 @@
   <main id="main-content" class="relative z-10">
 
     <!-- HERO SECTION -->
-    <section id="hero" class="relative min-h-screen flex flex-col justify-between px-6 sm:px-12 pt-36 pb-12 overflow-hidden">
+    <section id="hero" class="relative min-h-[100svh] flex flex-col justify-between px-4 sm:px-8 lg:px-12 pt-28 sm:pt-36 pb-8 sm:pb-12 overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-t from-noir-950 via-transparent to-noir-950/70 pointer-events-none z-0"></div>
 
-      <div class="relative z-10 flex flex-wrap justify-between items-center text-xs font-mono text-neutral-400 uppercase tracking-widest gap-4">
+      <!-- Micro metadata bar -->
+      <div class="relative z-10 flex flex-wrap justify-between items-center text-[10px] sm:text-xs font-mono text-neutral-400 uppercase tracking-widest gap-2 sm:gap-4">
         <div class="flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-limeAccent animate-pulse"></span>
+          <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-limeAccent animate-pulse"></span>
           <span>AUTONOMOUS FASHION & SPATIAL IMAGERY</span>
         </div>
-        <div class="flex items-center gap-6">
-          <span>VOLUME 04 / EDITION 2026</span>
-          <span class="hidden sm:inline">&bull; 40.7128° N, 74.0060° W</span>
+        <div class="flex items-center gap-4 sm:gap-6">
+          <span>VOL. 04 / ED. 2026</span>
+          <span class="hidden md:inline">&bull; 40.7128° N, 74.0060° W</span>
         </div>
       </div>
 
-      <div class="relative z-10 my-auto py-12">
+      <!-- Main Headline with Responsive Fluid Scale -->
+      <div class="relative z-10 my-auto py-8 sm:py-12">
         <div class="overflow-hidden">
-          <h1 class="hero-char-anim text-[15vw] sm:text-[13vw] font-sans font-bold leading-[0.8] tracking-tighter uppercase text-white">
+          <h1 class="hero-char-anim text-[15vw] sm:text-[13vw] lg:text-[11vw] font-sans font-bold leading-[0.82] tracking-tighter uppercase text-white">
             IMAGES
           </h1>
         </div>
         <div class="overflow-hidden flex items-baseline flex-wrap">
-          <span class="hero-char-anim text-2xl sm:text-4xl lg:text-5xl font-mono text-limeAccent mr-4 sm:mr-8 tracking-normal">
+          <span class="hero-char-anim text-lg sm:text-3xl lg:text-5xl font-mono text-limeAccent mr-2 sm:mr-6 tracking-normal">
             [WITH INTENT]
           </span>
-          <h1 class="hero-char-anim text-[15vw] sm:text-[13vw] font-serif italic leading-[0.8] tracking-tighter text-parchment/90">
+          <h1 class="hero-char-anim text-[15vw] sm:text-[13vw] lg:text-[11vw] font-serif italic leading-[0.82] tracking-tighter text-parchment/90">
             TRANSCEND.
           </h1>
         </div>
       </div>
 
-      <div class="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 pt-8 border-t border-white/10 font-mono text-xs text-neutral-400">
+      <!-- Hero Bottom Bar -->
+      <div class="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 pt-6 sm:pt-8 border-t border-white/10 font-mono text-[11px] sm:text-xs text-neutral-400">
         <div class="max-w-md">
           <p class="leading-relaxed text-neutral-300">
             Sculpting light, shadow, and human gravity through high-fashion editorial commissions and tactile photographic synthesis.
           </p>
         </div>
 
-        <div class="flex items-center gap-8">
-          <div class="flex flex-col text-right">
+        <div class="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-6 sm:gap-8">
+          <div class="flex flex-col text-left sm:text-right">
             <span class="text-neutral-500">EXPERIENCE INTERACTION</span>
-            <span class="text-limeAccent font-mono">DRAG & MOVE CURSOR</span>
+            <span class="text-limeAccent font-mono text-[10px] sm:text-xs">
+              <span class="hidden md:inline">DRAG & MOVE CURSOR</span>
+              <span class="md:hidden">TOUCH & SCROLL TO EXPLORE</span>
+            </span>
           </div>
 
-          <a href="#studio" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-limeAccent hover:text-limeAccent transition-colors">
-            <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <a href="#studio" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-limeAccent hover:text-limeAccent transition-colors shrink-0">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
             </svg>
           </a>
@@ -668,31 +706,31 @@
       </div>
     </section>
 
-    <!-- STUDIO INTRO SECTION -->
-    <section id="studio" class="relative py-36 px-6 sm:px-12 border-t border-noir-line bg-noir-900/60 backdrop-blur-md">
+    <!-- STUDIO INTRO SECTION (1-Col Mobile, 2-Col Tablet/Monitor) -->
+    <section id="studio" class="relative py-20 sm:py-32 lg:py-36 px-4 sm:px-8 lg:px-12 border-t border-noir-line bg-noir-900/60 backdrop-blur-md">
       <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-24 items-start">
           
-          <div class="lg:col-span-4 font-mono text-xs uppercase text-neutral-400 flex flex-col gap-6 sticky top-36">
+          <div class="lg:col-span-4 font-mono text-xs uppercase text-neutral-400 flex flex-col gap-4 sm:gap-6 lg:sticky lg:top-36">
             <div class="flex items-center gap-3 text-limeAccent font-bold">
               <span class="text-base font-sans">01</span>
               <span>// DISCIPLINE & IDENTITY</span>
             </div>
-            <p class="text-neutral-400 leading-relaxed">
+            <p class="text-neutral-400 leading-relaxed text-xs sm:text-sm">
               We operate at the fault lines of analog darkroom grain, architectural geometry, and real-time computer-generated physical optics.
             </p>
-            <div class="pt-6 border-t border-white/10 flex flex-col gap-2">
-              <span class="text-neutral-500">CORE FOCUS</span>
-              <span class="text-white">HAUTE EDITORIAL &bull; SPATIAL LUXURY &bull; MOTION</span>
+            <div class="pt-4 sm:pt-6 border-t border-white/10 flex flex-col gap-1 sm:gap-2">
+              <span class="text-neutral-500 text-[10px]">CORE FOCUS</span>
+              <span class="text-white text-xs">HAUTE EDITORIAL &bull; SPATIAL LUXURY &bull; MOTION</span>
             </div>
           </div>
 
-          <div class="lg:col-span-8 flex flex-col gap-16">
-            <h2 class="text-3xl sm:text-5xl lg:text-6xl font-sans font-medium tracking-tight leading-[1.1] text-neutral-100 reveal-text">
+          <div class="lg:col-span-8 flex flex-col gap-10 sm:gap-16">
+            <h2 class="text-2xl sm:text-4xl lg:text-6xl font-sans font-medium tracking-tight leading-[1.15] text-neutral-100 reveal-text">
               We engineer photographic impressions that <span class="text-limeAccent italic font-serif">command stillness</span> in an era of infinite, frictionless distraction.
             </h2>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-10 font-sans text-neutral-400 leading-relaxed text-base">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 font-sans text-neutral-400 leading-relaxed text-sm sm:text-base">
               <p>
                 NOIR / FRAME is an international creative laboratory that engineers visual dialogues for luxury fashion houses, iconic creators, and cultural institutes. Every frame is treated as a monumental sculpture of light, tone, and poise.
               </p>
@@ -701,30 +739,30 @@
               </p>
             </div>
 
-            <!-- Stats Metric Band -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-12 border-t border-white/10 font-mono">
+            <!-- Stats Metric Band (Adaptive 2-Col Mobile -> 4-Col Tablet/Desktop) -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 sm:pt-12 border-t border-white/10 font-mono">
               <div class="flex flex-col">
-                <span class="text-4xl sm:text-5xl font-sans font-bold text-white counter" data-target="140">0</span>
-                <span class="text-xs text-neutral-400 uppercase mt-2">GLOBAL CAMPAIGNS</span>
+                <span class="text-3xl sm:text-5xl font-sans font-bold text-white counter" data-target="140">0</span>
+                <span class="text-[10px] sm:text-xs text-neutral-400 uppercase mt-1 sm:mt-2">GLOBAL CAMPAIGNS</span>
               </div>
               <div class="flex flex-col">
-                <span class="text-4xl sm:text-5xl font-sans font-bold text-limeAccent counter" data-target="18">0</span>
-                <span class="text-xs text-neutral-400 uppercase mt-2">ANNUAL AWARDS</span>
+                <span class="text-3xl sm:text-5xl font-sans font-bold text-limeAccent counter" data-target="18">0</span>
+                <span class="text-[10px] sm:text-xs text-neutral-400 uppercase mt-1 sm:mt-2">ANNUAL AWARDS</span>
               </div>
               <div class="flex flex-col">
-                <span class="text-4xl sm:text-5xl font-sans font-bold text-white counter" data-target="99">0</span>
-                <span class="text-xs text-neutral-400 uppercase mt-2">% CLIENT RETENTION</span>
+                <span class="text-3xl sm:text-5xl font-sans font-bold text-white counter" data-target="99">0</span>
+                <span class="text-[10px] sm:text-xs text-neutral-400 uppercase mt-1 sm:mt-2">% RETENTION</span>
               </div>
               <div class="flex flex-col">
-                <span class="text-4xl sm:text-5xl font-sans font-bold text-neutral-300">8K+</span>
-                <span class="text-xs text-neutral-400 uppercase mt-2">ANALOG CAPTURES</span>
+                <span class="text-3xl sm:text-5xl font-sans font-bold text-neutral-300">8K+</span>
+                <span class="text-[10px] sm:text-xs text-neutral-400 uppercase mt-1 sm:mt-2">ANALOG CAPTURES</span>
               </div>
             </div>
 
-            <div class="pt-6">
-              <a href="#contact" class="inline-flex items-center gap-4 text-xs font-mono uppercase tracking-widest text-limeAccent group">
-                <span class="border-b border-limeAccent pb-1 group-hover:pr-3 transition-all duration-300">REQUEST STUDIO DOSSIER & CREDENTIALS</span>
-                <span class="text-lg transform group-hover:translate-x-2 transition-transform duration-300">→</span>
+            <div class="pt-2 sm:pt-6">
+              <a href="#contact" class="inline-flex items-center gap-3 sm:gap-4 text-xs font-mono uppercase tracking-widest text-limeAccent group">
+                <span class="border-b border-limeAccent pb-1 group-hover:pr-3 transition-all duration-300">REQUEST STUDIO DOSSIER</span>
+                <span class="text-base sm:text-lg transform group-hover:translate-x-2 transition-transform duration-300">→</span>
               </a>
             </div>
 
@@ -734,57 +772,58 @@
     </section>
 
     <!-- SELECTED WORKS PORTFOLIO -->
-    <section id="work" class="relative py-36 px-6 sm:px-12 border-t border-noir-line">
+    <section id="work" class="relative py-20 sm:py-32 lg:py-36 px-4 sm:px-8 lg:px-12 border-t border-noir-line">
       <div class="max-w-7xl mx-auto">
         
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 pb-8 border-b border-white/10">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 sm:mb-24 pb-6 sm:pb-8 border-b border-white/10">
           <div>
-            <div class="flex items-center gap-2 font-mono text-xs text-limeAccent uppercase tracking-widest mb-3">
-              <span class="w-2 h-2 rounded-full bg-limeAccent"></span>
+            <div class="flex items-center gap-2 font-mono text-[10px] sm:text-xs text-limeAccent uppercase tracking-widest mb-2 sm:mb-3">
+              <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-limeAccent"></span>
               <span>CURATED ARCHIVE 2024—2026</span>
             </div>
-            <h2 class="text-5xl sm:text-7xl lg:text-8xl font-sans font-bold tracking-tighter uppercase text-white">
+            <h2 class="text-4xl sm:text-6xl lg:text-8xl font-sans font-bold tracking-tighter uppercase text-white">
               SELECTED <span class="font-serif italic text-limeAccent font-normal">WORKS</span>
             </h2>
           </div>
-          <p class="font-mono text-xs text-neutral-400 max-w-xs mt-6 md:mt-0 uppercase">
-            A tactile exploration across hyper-saturated fashion landscapes, high-contrast monochrome studies, and sculptural object captures.
+          <p class="font-mono text-xs text-neutral-400 max-w-xs mt-4 md:mt-0 uppercase">
+            A tactile exploration across hyper-saturated fashion landscapes, monochrome studies, and sculptural objects.
           </p>
         </div>
 
         <!-- Project 01 -->
-        <div class="project-item mb-36 group" data-preview="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=85">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="project-item mb-20 sm:mb-32 lg:mb-36 group" data-preview="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=85">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 items-center">
             <div class="lg:col-span-7 tilt-card relative rounded-xl overflow-hidden bg-noir-900 border border-white/10 aspect-[4/5] sm:aspect-[16/11]">
               <div class="card-sheen"></div>
               <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1800&q=85" 
                    alt="Nocturnal Fashion Study" 
+                   loading="lazy"
                    class="project-img w-full h-full object-cover grayscale contrast-125 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
-              <div class="absolute bottom-4 left-4 z-20 px-3 py-1.5 rounded-md bg-black/60 backdrop-blur-md font-mono text-[10px] text-limeAccent border border-white/10 uppercase">
+              <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-20 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md font-mono text-[9px] sm:text-[10px] text-limeAccent border border-white/10 uppercase">
                 CAMPAIGN // PARIS FASHION WEEK
               </div>
             </div>
 
-            <div class="lg:col-span-5 flex flex-col justify-center space-y-6 lg:pl-6">
+            <div class="lg:col-span-5 flex flex-col justify-center space-y-4 sm:space-y-6 lg:pl-6">
               <div class="flex items-center justify-between font-mono text-xs text-neutral-400">
                 <span class="text-limeAccent font-bold">CASE STUDY // 01</span>
                 <span>OCTOBER 2026</span>
               </div>
-              <h3 class="text-4xl sm:text-6xl font-sans font-bold tracking-tighter text-white group-hover:text-limeAccent transition-colors duration-300">
+              <h3 class="text-3xl sm:text-5xl lg:text-6xl font-sans font-bold tracking-tighter text-white group-hover:text-limeAccent transition-colors duration-300">
                 AFTER DARK SYNDICATE
               </h3>
               <p class="text-neutral-400 font-sans leading-relaxed text-sm sm:text-base">
                 A nocturnal sartorial narrative interrogating the liminal energy of brutalist architecture after rain. Shot exclusively with continuous tungsten lighting and custom anamorphic lenses.
               </p>
               
-              <div class="flex flex-wrap gap-2 pt-2">
-                <span class="px-3 py-1 text-xs font-mono text-neutral-300 border border-white/15 rounded-full">Art Direction</span>
-                <span class="px-3 py-1 text-xs font-mono text-neutral-300 border border-white/15 rounded-full">35mm Film</span>
-                <span class="px-3 py-1 text-xs font-mono text-neutral-300 border border-white/15 rounded-full">Color Grading</span>
+              <div class="flex flex-wrap gap-2 pt-1 sm:pt-2">
+                <span class="px-2.5 py-1 text-[11px] font-mono text-neutral-300 border border-white/15 rounded-full">Art Direction</span>
+                <span class="px-2.5 py-1 text-[11px] font-mono text-neutral-300 border border-white/15 rounded-full">35mm Film</span>
+                <span class="px-2.5 py-1 text-[11px] font-mono text-neutral-300 border border-white/15 rounded-full">Color Grading</span>
               </div>
 
-              <div class="pt-4">
-                <a href="#contact" class="inline-flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-white hover:text-limeAccent transition-colors">
+              <div class="pt-2 sm:pt-4">
+                <a href="#contact" class="inline-flex items-center gap-2 sm:gap-3 font-mono text-xs uppercase tracking-widest text-white hover:text-limeAccent transition-colors">
                   <span>DISCOVER FULL EXHIBITION</span>
                   <span class="text-base transform group-hover:translate-x-2 transition-transform">↗</span>
                 </a>
@@ -793,29 +832,29 @@
           </div>
         </div>
 
-        <!-- Project 02 -->
-        <div class="project-item mb-36 group" data-preview="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=85">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-5 order-2 lg:order-1 flex flex-col justify-center space-y-6 lg:pr-6">
+        <!-- Project 02 (Alternating order on desktop) -->
+        <div class="project-item mb-20 sm:mb-32 lg:mb-36 group" data-preview="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=85">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 items-center">
+            <div class="lg:col-span-5 order-2 lg:order-1 flex flex-col justify-center space-y-4 sm:space-y-6 lg:pr-6">
               <div class="flex items-center justify-between font-mono text-xs text-neutral-400">
                 <span class="text-limeAccent font-bold">CASE STUDY // 02</span>
                 <span>AUGUST 2026</span>
               </div>
-              <h3 class="text-4xl sm:text-6xl font-sans font-bold tracking-tighter text-white group-hover:text-limeAccent transition-colors duration-300">
+              <h3 class="text-3xl sm:text-5xl lg:text-6xl font-sans font-bold tracking-tighter text-white group-hover:text-limeAccent transition-colors duration-300">
                 SOFT POWER & SILENCE
               </h3>
               <p class="text-neutral-400 font-sans leading-relaxed text-sm sm:text-base">
-                Intimate character portraits capturing the visceral vulnerability of visionary multidisciplinary choreographers in Tokyo. Captured using custom medium-format digital sensors.
+                Intimate character portraits capturing the visceral vulnerability of visionary choreographers in Tokyo. Captured using custom medium-format digital sensors.
               </p>
               
-              <div class="flex flex-wrap gap-2 pt-2">
-                <span class="px-3 py-1 text-xs font-mono text-neutral-300 border border-white/15 rounded-full">Monochrome</span>
-                <span class="px-3 py-1 text-xs font-mono text-neutral-300 border border-white/15 rounded-full">Editorial Portrait</span>
-                <span class="px-3 py-1 text-xs font-mono text-neutral-300 border border-white/15 rounded-full">Volumetric Scans</span>
+              <div class="flex flex-wrap gap-2 pt-1 sm:pt-2">
+                <span class="px-2.5 py-1 text-[11px] font-mono text-neutral-300 border border-white/15 rounded-full">Monochrome</span>
+                <span class="px-2.5 py-1 text-[11px] font-mono text-neutral-300 border border-white/15 rounded-full">Editorial Portrait</span>
+                <span class="px-2.5 py-1 text-[11px] font-mono text-neutral-300 border border-white/15 rounded-full">Volumetric</span>
               </div>
 
-              <div class="pt-4">
-                <a href="#contact" class="inline-flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-white hover:text-limeAccent transition-colors">
+              <div class="pt-2 sm:pt-4">
+                <a href="#contact" class="inline-flex items-center gap-2 sm:gap-3 font-mono text-xs uppercase tracking-widest text-white hover:text-limeAccent transition-colors">
                   <span>DISCOVER FULL EXHIBITION</span>
                   <span class="text-base transform group-hover:translate-x-2 transition-transform">↗</span>
                 </a>
@@ -826,8 +865,9 @@
               <div class="card-sheen"></div>
               <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1800&q=85" 
                    alt="Tokyo Portrait Series" 
+                   loading="lazy"
                    class="project-img w-full h-full object-cover grayscale contrast-125 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
-              <div class="absolute bottom-4 left-4 z-20 px-3 py-1.5 rounded-md bg-black/60 backdrop-blur-md font-mono text-[10px] text-limeAccent border border-white/10 uppercase">
+              <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-20 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md font-mono text-[9px] sm:text-[10px] text-limeAccent border border-white/10 uppercase">
                 PORTRAITURE // TOKYO UNDERGROUND
               </div>
             </div>
@@ -836,37 +876,38 @@
 
         <!-- Project 03 -->
         <div class="project-item mb-12 group" data-preview="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1200&q=85">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 items-center">
             <div class="lg:col-span-7 tilt-card relative rounded-xl overflow-hidden bg-noir-900 border border-white/10 aspect-[4/5] sm:aspect-[16/11]">
               <div class="card-sheen"></div>
               <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1800&q=85" 
                    alt="Sculptural Fragrance & Object Study" 
+                   loading="lazy"
                    class="project-img w-full h-full object-cover grayscale contrast-125 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
-              <div class="absolute bottom-4 left-4 z-20 px-3 py-1.5 rounded-md bg-black/60 backdrop-blur-md font-mono text-[10px] text-limeAccent border border-white/10 uppercase">
+              <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-20 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md font-mono text-[9px] sm:text-[10px] text-limeAccent border border-white/10 uppercase">
                 SCULPTURE // OBJECT ARCHITECTURE
               </div>
             </div>
 
-            <div class="lg:col-span-5 flex flex-col justify-center space-y-6 lg:pl-6">
+            <div class="lg:col-span-5 flex flex-col justify-center space-y-4 sm:space-y-6 lg:pl-6">
               <div class="flex items-center justify-between font-mono text-xs text-neutral-400">
                 <span class="text-limeAccent font-bold">CASE STUDY // 03</span>
                 <span>JANUARY 2025</span>
               </div>
-              <h3 class="text-4xl sm:text-6xl font-sans font-bold tracking-tighter text-white group-hover:text-limeAccent transition-colors duration-300">
+              <h3 class="text-3xl sm:text-5xl lg:text-6xl font-sans font-bold tracking-tighter text-white group-hover:text-limeAccent transition-colors duration-300">
                 OBJECT ARTIFACT STUDY
               </h3>
               <p class="text-neutral-400 font-sans leading-relaxed text-sm sm:text-base">
                 Precise, sculptural still life capturing hyper-dense glass surfaces, amber resins, and tactile materiality for an artisanal Scandinavian parfumerie house.
               </p>
               
-              <div class="flex flex-wrap gap-2 pt-2">
-                <span class="px-3 py-1 text-xs font-mono text-neutral-300 border border-white/15 rounded-full">Product Spatial</span>
-                <span class="px-3 py-1 text-xs font-mono text-neutral-300 border border-white/15 rounded-full">High Dynamic Range</span>
-                <span class="px-3 py-1 text-xs font-mono text-neutral-300 border border-white/15 rounded-full">Retouching</span>
+              <div class="flex flex-wrap gap-2 pt-1 sm:pt-2">
+                <span class="px-2.5 py-1 text-[11px] font-mono text-neutral-300 border border-white/15 rounded-full">Product Spatial</span>
+                <span class="px-2.5 py-1 text-[11px] font-mono text-neutral-300 border border-white/15 rounded-full">HDR</span>
+                <span class="px-2.5 py-1 text-[11px] font-mono text-neutral-300 border border-white/15 rounded-full">Retouching</span>
               </div>
 
-              <div class="pt-4">
-                <a href="#contact" class="inline-flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-white hover:text-limeAccent transition-colors">
+              <div class="pt-2 sm:pt-4">
+                <a href="#contact" class="inline-flex items-center gap-2 sm:gap-3 font-mono text-xs uppercase tracking-widest text-white hover:text-limeAccent transition-colors">
                   <span>DISCOVER FULL EXHIBITION</span>
                   <span class="text-base transform group-hover:translate-x-2 transition-transform">↗</span>
                 </a>
@@ -879,35 +920,33 @@
     </section>
 
     <!-- MANIFESTO SECTION -->
-    <section id="manifesto" class="relative py-32 bg-noir-900 border-y border-noir-line overflow-hidden">
-      <div class="w-full overflow-hidden whitespace-nowrap py-4 border-b border-white/10 bg-black/40">
-        <div class="marquee-track flex gap-8 font-mono text-xs tracking-widest text-neutral-400 uppercase">
+    <section id="manifesto" class="relative py-20 sm:py-32 bg-noir-900 border-y border-noir-line overflow-hidden">
+      <div class="w-full overflow-hidden whitespace-nowrap py-3 sm:py-4 border-b border-white/10 bg-black/40">
+        <div class="marquee-track flex gap-6 sm:gap-8 font-mono text-[10px] sm:text-xs tracking-widest text-neutral-400 uppercase">
           <span>&bull; PERFECTION IS THE ENEMY OF ATMOSPHERE</span>
           <span>&bull; AN ANALOG SOUL IN A GENERATIVE EPOCH</span>
           <span>&bull; SCULPTING HUMAN FORM THROUGH PHYSICAL RESISTANCE</span>
           <span>&bull; RETAIN THE NOISE // PURIFY THE GESTURE</span>
           <span>&bull; PERFECTION IS THE ENEMY OF ATMOSPHERE</span>
           <span>&bull; AN ANALOG SOUL IN A GENERATIVE EPOCH</span>
-          <span>&bull; SCULPTING HUMAN FORM THROUGH PHYSICAL RESISTANCE</span>
-          <span>&bull; RETAIN THE NOISE // PURIFY THE GESTURE</span>
         </div>
       </div>
 
-      <div class="max-w-6xl mx-auto px-6 sm:px-12 py-24 text-center">
-        <span class="font-mono text-xs text-limeAccent uppercase tracking-[0.3em] block mb-8">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8 lg:px-12 py-16 sm:py-24 text-center">
+        <span class="font-mono text-[10px] sm:text-xs text-limeAccent uppercase tracking-[0.25em] sm:tracking-[0.3em] block mb-4 sm:mb-8">
           [THE NOIR / FRAME CREED]
         </span>
-        <h2 class="text-5xl sm:text-8xl lg:text-9xl font-sans font-extrabold tracking-tighter leading-[0.85] uppercase text-white mb-6">
+        <h2 class="text-4xl sm:text-7xl lg:text-9xl font-sans font-extrabold tracking-tighter leading-[0.88] uppercase text-white mb-4 sm:mb-6">
           MAKE IT <br>
           <span class="font-serif italic font-normal text-limeAccent">MATTER.</span>
         </h2>
-        <p class="max-w-2xl mx-auto font-sans text-neutral-300 text-lg sm:text-xl leading-relaxed mt-10">
+        <p class="max-w-2xl mx-auto font-sans text-neutral-300 text-sm sm:text-lg lg:text-xl leading-relaxed mt-6 sm:mt-10">
           In an atmosphere flooded with algorithmic synthetic duplicates, we stand fiercely for the unrepeatable anomaly: an accident of lens flare, the trembling tension of a live model, and timeless tactile gravity.
         </p>
       </div>
 
-      <div class="w-full overflow-hidden whitespace-nowrap py-4 border-t border-white/10 bg-black/40">
-        <div class="marquee-track flex gap-8 font-mono text-xs tracking-widest text-limeAccent uppercase" style="animation-direction: reverse;">
+      <div class="w-full overflow-hidden whitespace-nowrap py-3 sm:py-4 border-t border-white/10 bg-black/40">
+        <div class="marquee-track flex gap-6 sm:gap-8 font-mono text-[10px] sm:text-xs tracking-widest text-limeAccent uppercase" style="animation-direction: reverse;">
           <span>// CREATIVE DIRECTION</span>
           <span>// 8X10 LARGE FORMAT</span>
           <span>// SPATIAL COMPOSITING</span>
@@ -915,88 +954,89 @@
           <span>// RUNWAY & COUTURE ARCHIVE</span>
           <span>// CREATIVE DIRECTION</span>
           <span>// 8X10 LARGE FORMAT</span>
-          <span>// SPATIAL COMPOSITING</span>
-          <span>// EXPERIMENTAL TYPOGRAPHY</span>
-          <span>// RUNWAY & COUTURE ARCHIVE</span>
         </div>
       </div>
     </section>
 
     <!-- SERVICES SECTION -->
-    <section id="services" class="relative py-36 px-6 sm:px-12 border-b border-noir-line">
+    <section id="services" class="relative py-20 sm:py-32 lg:py-36 px-4 sm:px-8 lg:px-12 border-b border-noir-line">
       <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-20">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-20">
           <div>
-            <span class="font-mono text-xs text-limeAccent uppercase tracking-widest block mb-3">03 // CAPABILITIES</span>
-            <h2 class="text-5xl sm:text-7xl font-sans font-bold tracking-tighter uppercase text-white">
+            <span class="font-mono text-[10px] sm:text-xs text-limeAccent uppercase tracking-widest block mb-2 sm:mb-3">03 // CAPABILITIES</span>
+            <h2 class="text-4xl sm:text-6xl lg:text-7xl font-sans font-bold tracking-tighter uppercase text-white">
               WHAT WE <span class="font-serif italic text-limeAccent font-normal">DELIVER</span>
             </h2>
           </div>
-          <p class="font-mono text-xs text-neutral-400 max-w-sm mt-6 md:mt-0 uppercase">
+          <p class="font-mono text-xs text-neutral-400 max-w-sm mt-4 md:mt-0 uppercase">
             End-to-end bespoke visual production, creative direction, high-definition captures, and spatial experiential installations.
           </p>
         </div>
 
         <div class="border-t border-white/15">
-          <div class="service-row group py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:px-6 hover:bg-white/[0.02]"
+          <!-- Service 01 -->
+          <div class="service-row group py-6 sm:py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:px-2 sm:hover:px-6 hover:bg-white/[0.02]"
                data-preview="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=80">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-              <span class="md:col-span-2 font-mono text-xs text-neutral-500 group-hover:text-limeAccent transition-colors">01 // DIRECTION</span>
-              <h3 class="md:col-span-6 text-3xl sm:text-5xl font-sans font-medium tracking-tight text-white group-hover:text-limeAccent group-hover:translate-x-2 transition-all">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-4 items-center">
+              <span class="md:col-span-2 font-mono text-[10px] sm:text-xs text-neutral-500 group-hover:text-limeAccent transition-colors">01 // DIRECTION</span>
+              <h3 class="md:col-span-6 text-2xl sm:text-4xl lg:text-5xl font-sans font-medium tracking-tight text-white group-hover:text-limeAccent group-hover:translate-x-2 transition-all">
                 Creative & Art Direction
               </h3>
-              <p class="md:col-span-3 text-neutral-400 font-mono text-xs uppercase">
+              <p class="md:col-span-3 text-neutral-400 font-mono text-[11px] sm:text-xs uppercase">
                 Narrative Concepts &bull; Mood Systems &bull; Visual Identity
               </p>
-              <div class="md:col-span-1 flex justify-end">
+              <div class="md:col-span-1 hidden md:flex justify-end">
                 <span class="text-2xl text-neutral-600 group-hover:text-limeAccent transform group-hover:rotate-45 transition-all">↗</span>
               </div>
             </div>
           </div>
 
-          <div class="service-row group py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:px-6 hover:bg-white/[0.02]"
+          <!-- Service 02 -->
+          <div class="service-row group py-6 sm:py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:px-2 sm:hover:px-6 hover:bg-white/[0.02]"
                data-preview="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1000&q=80">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-              <span class="md:col-span-2 font-mono text-xs text-neutral-500 group-hover:text-limeAccent transition-colors">02 // CAPTURE</span>
-              <h3 class="md:col-span-6 text-3xl sm:text-5xl font-sans font-medium tracking-tight text-white group-hover:text-limeAccent group-hover:translate-x-2 transition-all">
-                Editorial & Campaign Photography
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-4 items-center">
+              <span class="md:col-span-2 font-mono text-[10px] sm:text-xs text-neutral-500 group-hover:text-limeAccent transition-colors">02 // CAPTURE</span>
+              <h3 class="md:col-span-6 text-2xl sm:text-4xl lg:text-5xl font-sans font-medium tracking-tight text-white group-hover:text-limeAccent group-hover:translate-x-2 transition-all">
+                Editorial & Campaign
               </h3>
-              <p class="md:col-span-3 text-neutral-400 font-mono text-xs uppercase">
-                Haute Couture &bull; Analog Negatives &bull; High End Retouching
+              <p class="md:col-span-3 text-neutral-400 font-mono text-[11px] sm:text-xs uppercase">
+                Haute Couture &bull; Analog Negatives &bull; Retouching
               </p>
-              <div class="md:col-span-1 flex justify-end">
+              <div class="md:col-span-1 hidden md:flex justify-end">
                 <span class="text-2xl text-neutral-600 group-hover:text-limeAccent transform group-hover:rotate-45 transition-all">↗</span>
               </div>
             </div>
           </div>
 
-          <div class="service-row group py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:px-6 hover:bg-white/[0.02]"
+          <!-- Service 03 -->
+          <div class="service-row group py-6 sm:py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:px-2 sm:hover:px-6 hover:bg-white/[0.02]"
                data-preview="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1000&q=80">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-              <span class="md:col-span-2 font-mono text-xs text-neutral-500 group-hover:text-limeAccent transition-colors">03 // CINEMA</span>
-              <h3 class="md:col-span-6 text-3xl sm:text-5xl font-sans font-medium tracking-tight text-white group-hover:text-limeAccent group-hover:translate-x-2 transition-all">
-                Moving Image & Cinematography
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-4 items-center">
+              <span class="md:col-span-2 font-mono text-[10px] sm:text-xs text-neutral-500 group-hover:text-limeAccent transition-colors">03 // CINEMA</span>
+              <h3 class="md:col-span-6 text-2xl sm:text-4xl lg:text-5xl font-sans font-medium tracking-tight text-white group-hover:text-limeAccent group-hover:translate-x-2 transition-all">
+                Moving Image
               </h3>
-              <p class="md:col-span-3 text-neutral-400 font-mono text-xs uppercase">
+              <p class="md:col-span-3 text-neutral-400 font-mono text-[11px] sm:text-xs uppercase">
                 16mm Motion &bull; Runway Vignettes &bull; Sound Design
               </p>
-              <div class="md:col-span-1 flex justify-end">
+              <div class="md:col-span-1 hidden md:flex justify-end">
                 <span class="text-2xl text-neutral-600 group-hover:text-limeAccent transform group-hover:rotate-45 transition-all">↗</span>
               </div>
             </div>
           </div>
 
-          <div class="service-row group py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:px-6 hover:bg-white/[0.02]"
+          <!-- Service 04 -->
+          <div class="service-row group py-6 sm:py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:px-2 sm:hover:px-6 hover:bg-white/[0.02]"
                data-preview="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-              <span class="md:col-span-2 font-mono text-xs text-neutral-500 group-hover:text-limeAccent transition-colors">04 // SYNTHESIS</span>
-              <h3 class="md:col-span-6 text-3xl sm:text-5xl font-sans font-medium tracking-tight text-white group-hover:text-limeAccent group-hover:translate-x-2 transition-all">
-                Spatial Scans & 3D Lighting
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-4 items-center">
+              <span class="md:col-span-2 font-mono text-[10px] sm:text-xs text-neutral-500 group-hover:text-limeAccent transition-colors">04 // SYNTHESIS</span>
+              <h3 class="md:col-span-6 text-2xl sm:text-4xl lg:text-5xl font-sans font-medium tracking-tight text-white group-hover:text-limeAccent group-hover:translate-x-2 transition-all">
+                Spatial Scans & 3D
               </h3>
-              <p class="md:col-span-3 text-neutral-400 font-mono text-xs uppercase">
-                NeRF Volumetric Assets &bull; Interactive WebGL &bull; Virtual Worlds
+              <p class="md:col-span-3 text-neutral-400 font-mono text-[11px] sm:text-xs uppercase">
+                NeRF Volumetric Assets &bull; Interactive WebGL
               </p>
-              <div class="md:col-span-1 flex justify-end">
+              <div class="md:col-span-1 hidden md:flex justify-end">
                 <span class="text-2xl text-neutral-600 group-hover:text-limeAccent transform group-hover:rotate-45 transition-all">↗</span>
               </div>
             </div>
@@ -1006,60 +1046,62 @@
     </section>
 
     <!-- CONTACT SECTION -->
-    <section id="contact" class="relative min-h-screen flex flex-col justify-between py-24 px-6 sm:px-12 bg-gradient-to-b from-noir-950 to-black overflow-hidden">
-      <div class="absolute bottom-0 right-0 font-sans font-black text-[22vw] text-white/[0.015] pointer-events-none select-none leading-none -mb-16">
+    <section id="contact" class="relative min-h-[100svh] flex flex-col justify-between py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-gradient-to-b from-noir-950 to-black overflow-hidden">
+      <!-- Background Watermark -->
+      <div class="absolute bottom-0 right-0 font-sans font-black text-[28vw] sm:text-[22vw] text-white/[0.015] pointer-events-none select-none leading-none -mb-8 sm:-mb-16">
         NOIR
       </div>
 
       <div class="max-w-7xl mx-auto w-full relative z-10 my-auto">
         <div class="max-w-3xl">
-          <div class="flex items-center gap-3 font-mono text-xs text-limeAccent uppercase tracking-widest mb-6">
-            <span class="w-2 h-2 rounded-full bg-limeAccent animate-ping"></span>
-            <span>ACCEPTING GLOBAL COMMISSIONS FOR 2026/2027</span>
+          <div class="flex items-center gap-2 sm:gap-3 font-mono text-[10px] sm:text-xs text-limeAccent uppercase tracking-widest mb-4 sm:mb-6">
+            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-limeAccent animate-ping"></span>
+            <span>ACCEPTING COMMISSIONS FOR 2026/2027</span>
           </div>
-          <h2 class="text-6xl sm:text-8xl lg:text-9xl font-sans font-extrabold tracking-tighter leading-[0.82] uppercase text-white mb-8">
+          <h2 class="text-4xl sm:text-7xl lg:text-9xl font-sans font-extrabold tracking-tighter leading-[0.84] uppercase text-white mb-6 sm:mb-8">
             LET’S MAKE <br>
             <span class="font-serif italic text-limeAccent font-normal">HISTORY.</span>
           </h2>
-          <p class="text-neutral-400 font-sans text-base sm:text-xl leading-relaxed mb-12">
-            Have an upcoming campaign, museum publication, or high-luxury initiative? We partner with discerning clients across the globe.
+          <p class="text-neutral-400 font-sans text-sm sm:text-lg lg:text-xl leading-relaxed mb-8 sm:mb-12">
+            Have an upcoming campaign, publication, or high-luxury initiative? We partner with discerning clients across the globe.
           </p>
 
-          <div class="flex flex-wrap gap-6 items-center">
+          <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch sm:items-center">
             <a href="mailto:director@noirframe.studio" 
-               class="magnetic-trigger px-8 py-5 rounded-full bg-limeAccent text-noir-950 font-mono text-xs font-bold uppercase tracking-widest hover:bg-white transition-colors duration-300 shadow-[0_0_40px_rgba(216,255,53,0.3)]">
+               class="magnetic-trigger px-6 sm:px-8 py-4 sm:py-5 rounded-full bg-limeAccent text-noir-950 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-widest hover:bg-white text-center transition-colors duration-300 shadow-[0_0_40px_rgba(216,255,53,0.3)]">
               INITIATE A CONVERSATION ↗
             </a>
             <a href="#hero" 
-               class="magnetic-trigger px-8 py-5 rounded-full border border-white/20 text-white font-mono text-xs uppercase tracking-widest hover:border-limeAccent hover:text-limeAccent transition-colors duration-300 backdrop-blur-md">
+               class="magnetic-trigger px-6 sm:px-8 py-4 sm:py-5 rounded-full border border-white/20 text-white font-mono text-[11px] sm:text-xs uppercase tracking-widest hover:border-limeAccent hover:text-limeAccent text-center transition-colors duration-300 backdrop-blur-md">
               BACK TO SUMMIT ↑
             </a>
           </div>
         </div>
       </div>
 
-      <div class="relative z-10 border-t border-white/10 pt-12 mt-16 max-w-7xl mx-auto w-full">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 font-mono text-xs text-neutral-400">
+      <!-- Footer Info Grid (Responsive: 1-col mobile, 2-col tablet, 4-col desktop) -->
+      <div class="relative z-10 border-t border-white/10 pt-8 sm:pt-12 mt-12 sm:mt-16 max-w-7xl mx-auto w-full">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 font-mono text-xs text-neutral-400">
           <div>
-            <span class="text-white block font-bold mb-2">// DIRECT ACCESS</span>
+            <span class="text-white block font-bold mb-1 sm:mb-2">// DIRECT ACCESS</span>
             <p>hello@noirframe.studio</p>
             <p>press@noirframe.studio</p>
           </div>
           <div>
-            <span class="text-white block font-bold mb-2">// ATELIER LOCATIONS</span>
+            <span class="text-white block font-bold mb-1 sm:mb-2">// ATELIER LOCATIONS</span>
             <p>Studio A: 742 S Hill St, Los Angeles</p>
             <p>Studio B: Shibuya-ku, Tokyo 150-0001</p>
           </div>
           <div>
-            <span class="text-white block font-bold mb-2">// NETWORK ARCHIVE</span>
+            <span class="text-white block font-bold mb-1 sm:mb-2">// NETWORK ARCHIVE</span>
             <div class="flex gap-4">
               <a href="#" class="hover:text-limeAccent transition-colors">Instagram</a>
               <a href="#" class="hover:text-limeAccent transition-colors">Twitter/X</a>
               <a href="#" class="hover:text-limeAccent transition-colors">ReadCV</a>
             </div>
           </div>
-          <div class="text-left md:text-right">
-            <span class="text-white block font-bold mb-2">// STATUS</span>
+          <div class="text-left sm:text-left lg:text-right">
+            <span class="text-white block font-bold mb-1 sm:mb-2">// STATUS</span>
             <p class="text-limeAccent">OPERATIONAL &bull; 24.8°C LA</p>
             <p class="text-neutral-500">© 2026 NOIR/FRAME STUDIO</p>
           </div>
@@ -1071,16 +1113,18 @@
 
   <script>
     /* ==========================================================
-       1. LENIS SMOOTH SCROLL INITIALIZATION
+       1. DEVICE DETECTION & LENIS SCROLL INITIALIZATION
        ========================================================== */
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || window.innerWidth <= 1024;
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: isTouchDevice ? 0.9 : 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: 2
+      touchMultiplier: 1.5
     });
 
     lenis.on('scroll', ScrollTrigger.update);
@@ -1091,12 +1135,12 @@
     gsap.ticker.lagSmoothing(0);
 
     /* ==========================================================
-       2. THREE.JS METALLIC SCULPTURE & PARTICLES
+       2. RESPONSIVE THREE.JS ADAPTIVE SCENE & FOV
        ========================================================== */
     const canvas = document.getElementById('webgl-canvas');
     const renderer = new THREE.WebGLRenderer({
       canvas,
-      antialias: true,
+      antialias: window.devicePixelRatio <= 1.5,
       alpha: true,
       powerPreference: 'high-performance'
     });
@@ -1106,7 +1150,22 @@
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.z = 4.8;
+    
+    // Dynamically adjust camera Z based on screen aspect ratio
+    function updateCameraPosition() {
+      const aspect = window.innerWidth / window.innerHeight;
+      if (aspect < 0.6) {
+        // Mobile portrait
+        camera.position.z = 6.2;
+      } else if (aspect < 1.0) {
+        // Tablet portrait
+        camera.position.z = 5.4;
+      } else {
+        // Desktop / Landscape
+        camera.position.z = 4.8;
+      }
+    }
+    updateCameraPosition();
 
     const customMaterial = new THREE.ShaderMaterial({
       uniforms: {
@@ -1209,11 +1268,12 @@
       transparent: true
     });
 
-    const geometry = new THREE.TorusKnotGeometry(1.2, 0.42, 180, 48, 2, 3);
+    const geometry = new THREE.TorusKnotGeometry(1.2, 0.42, 160, 40, 2, 3);
     const organicSculpture = new THREE.Mesh(geometry, customMaterial);
     scene.add(organicSculpture);
 
-    const particlesCount = 350;
+    // Starfield particles count adjusted for mobile efficiency
+    const particlesCount = window.innerWidth < 768 ? 160 : 350;
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particlesCount * 3);
 
@@ -1225,7 +1285,7 @@
     particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
 
     const particleMat = new THREE.PointsMaterial({
-      size: 0.035,
+      size: window.innerWidth < 768 ? 0.04 : 0.035,
       color: 0xd8ff35,
       transparent: true,
       opacity: 0.35,
@@ -1242,6 +1302,14 @@
       targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
       targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
     });
+
+    // Touch gyroscope emulation for tablets & phones
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        targetMouseX = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+        targetMouseY = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+      }
+    }, { passive: true });
 
     const clock = new THREE.Clock();
 
@@ -1268,13 +1336,14 @@
 
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
+      updateCameraPosition();
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     });
 
     /* ==========================================================
-       3. ZERO-LAG HARDWARE CURSOR
+       3. ZERO-LAG HARDWARE CURSOR ENGINE (DESKTOP)
        ========================================================== */
     const cursorDotContainer = document.querySelector('.custom-cursor');
     const cursorRing = document.querySelector('.cursor-ring');
@@ -1284,130 +1353,115 @@
     const drawingSheet = document.getElementById('drawing-sheet');
     const sheetPhoto = document.getElementById('sheet-photo');
 
-    window.addEventListener('pointermove', (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-      cursorDotContainer.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
+    if (!isTouchDevice) {
+      window.addEventListener('pointermove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        cursorDotContainer.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
 
-      // Dynamic cursor coordinates for photographic emulsion on the drawing sheet
-      if (drawingSheet && sheetPhoto) {
-        const rect = drawingSheet.getBoundingClientRect();
-        const sheetX = e.clientX - rect.left;
-        const sheetY = e.clientY - rect.top;
-        sheetPhoto.style.setProperty('--sheet-x', `${sheetX}px`);
-        sheetPhoto.style.setProperty('--sheet-y', `${sheetY}px`);
+        if (drawingSheet && sheetPhoto) {
+          const rect = drawingSheet.getBoundingClientRect();
+          const sheetX = e.clientX - rect.left;
+          const sheetY = e.clientY - rect.top;
+          sheetPhoto.style.setProperty('--sheet-x', `${sheetX}px`);
+          sheetPhoto.style.setProperty('--sheet-y', `${sheetY}px`);
+        }
+      }, { passive: true });
+
+      function renderCursor() {
+        ringPos.x += (mouse.x - ringPos.x) * 0.25;
+        ringPos.y += (mouse.y - ringPos.y) * 0.25;
+        cursorRing.style.transform = `translate3d(${ringPos.x}px, ${ringPos.y}px, 0) translate(-50%, -50%)`;
+        requestAnimationFrame(renderCursor);
       }
-    }, { passive: true });
-
-    function renderCursor() {
-      ringPos.x += (mouse.x - ringPos.x) * 0.25;
-      ringPos.y += (mouse.y - ringPos.y) * 0.25;
-      cursorRing.style.transform = `translate3d(${ringPos.x}px, ${ringPos.y}px, 0) translate(-50%, -50%)`;
       requestAnimationFrame(renderCursor);
-    }
-    requestAnimationFrame(renderCursor);
 
-    document.querySelectorAll('a, button, .service-row, .tilt-card').forEach((el) => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-    });
+      document.querySelectorAll('a, button, .service-row, .tilt-card').forEach((el) => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+      });
 
-    document.querySelectorAll('.project-item').forEach((item) => {
-      item.addEventListener('mouseenter', () => document.body.classList.add('viewing-project'));
-      item.addEventListener('mouseleave', () => document.body.classList.remove('viewing-project'));
-    });
+      document.querySelectorAll('.project-item').forEach((item) => {
+        item.addEventListener('mouseenter', () => document.body.classList.add('viewing-project'));
+        item.addEventListener('mouseleave', () => document.body.classList.remove('viewing-project'));
+      });
 
-    /* ==========================================================
-       4. MAGNETIC BUTTON PHYSICS
-       ========================================================== */
-    document.querySelectorAll('.magnetic-trigger').forEach((btn) => {
-      btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const deltaX = (e.clientX - centerX) * 0.35;
-        const deltaY = (e.clientY - centerY) * 0.35;
+      // 3D Perspective Card Tilt (Desktop Only)
+      document.querySelectorAll('.tilt-card').forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
 
-        gsap.to(btn, {
-          x: deltaX,
-          y: deltaY,
-          duration: 0.3,
-          ease: 'power2.out'
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = ((y - centerY) / centerY) * -9;
+          const rotateY = ((x - centerX) / centerX) * 9;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+          const percentX = (x / rect.width) * 100;
+          const percentY = (y / rect.height) * 100;
+          card.style.setProperty('--mouse-x', `${percentX}%`);
+          card.style.setProperty('--mouse-y', `${percentY}%`);
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+          card.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+        });
+
+        card.addEventListener('mouseenter', () => {
+          card.style.transition = 'none';
         });
       });
 
-      btn.addEventListener('mouseleave', () => {
-        gsap.to(btn, {
-          x: 0,
-          y: 0,
-          duration: 0.6,
-          ease: 'elastic.out(1, 0.3)'
+      // Magnetic Buttons (Desktop Only)
+      document.querySelectorAll('.magnetic-trigger').forEach((btn) => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const deltaX = (e.clientX - centerX) * 0.35;
+          const deltaY = (e.clientY - centerY) * 0.35;
+
+          gsap.to(btn, { x: deltaX, y: deltaY, duration: 0.3, ease: 'power2.out' });
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.3)' });
         });
       });
-    });
 
-    /* ==========================================================
-       5. 3D PERSPECTIVE CARD TILT
-       ========================================================== */
-    document.querySelectorAll('.tilt-card').forEach((card) => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+      // Floating Project Follower (Desktop Only)
+      const floatingPreview = document.getElementById('floating-preview');
+      const floatingImg = document.getElementById('floating-preview-img');
 
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateX = ((y - centerY) / centerY) * -9;
-        const rotateY = ((x - centerX) / centerX) * 9;
-
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-
-        const percentX = (x / rect.width) * 100;
-        const percentY = (y / rect.height) * 100;
-        card.style.setProperty('--mouse-x', `${percentX}%`);
-        card.style.setProperty('--mouse-y', `${percentY}%`);
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-        card.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-      });
-
-      card.addEventListener('mouseenter', () => {
-        card.style.transition = 'none';
-      });
-    });
-
-    /* ==========================================================
-       6. FLOATING PROJECT PREVIEW
-       ========================================================== */
-    const floatingPreview = document.getElementById('floating-preview');
-    const floatingImg = document.getElementById('floating-preview-img');
-
-    window.addEventListener('mousemove', (e) => {
-      if (floatingPreview && floatingPreview.classList.contains('active')) {
-        floatingPreview.style.left = `${e.clientX + 30}px`;
-        floatingPreview.style.top = `${e.clientY + 20}px`;
-      }
-    });
-
-    document.querySelectorAll('[data-preview]').forEach((item) => {
-      item.addEventListener('mouseenter', () => {
-        const imgUrl = item.getAttribute('data-preview');
-        if (imgUrl && floatingImg) {
-          floatingImg.src = imgUrl;
-          floatingPreview.classList.add('active');
+      window.addEventListener('mousemove', (e) => {
+        if (floatingPreview && floatingPreview.classList.contains('active')) {
+          floatingPreview.style.left = `${e.clientX + 30}px`;
+          floatingPreview.style.top = `${e.clientY + 20}px`;
         }
       });
 
-      item.addEventListener('mouseleave', () => {
-        if (floatingPreview) floatingPreview.classList.remove('active');
+      document.querySelectorAll('[data-preview]').forEach((item) => {
+        item.addEventListener('mouseenter', () => {
+          const imgUrl = item.getAttribute('data-preview');
+          if (imgUrl && floatingImg) {
+            floatingImg.src = imgUrl;
+            floatingPreview.classList.add('active');
+          }
+        });
+
+        item.addEventListener('mouseleave', () => {
+          if (floatingPreview) floatingPreview.classList.remove('active');
+        });
       });
-    });
+    }
 
     /* ==========================================================
-       7. TONE.JS AMBIENT AUDIO SYNTHESIZER
+       4. TONE.JS AMBIENT AUDIO SYNTHESIZER
        ========================================================== */
     let isAudioActive = false;
     let synth = null;
@@ -1437,13 +1491,13 @@
 
           humSynth.start();
           isAudioActive = true;
-          audioStatus.textContent = 'SOUND [ACTIVE]';
+          if (audioStatus) audioStatus.textContent = 'SOUND [ACTIVE]';
           audioBtn.classList.add('border-limeAccent', 'text-limeAccent');
           synth.triggerAttackRelease(['C4', 'G4', 'E5'], '8n');
         } else {
           if (humSynth) humSynth.stop();
           isAudioActive = false;
-          audioStatus.textContent = 'SOUND [OFF]';
+          if (audioStatus) audioStatus.textContent = 'SOUND [OFF]';
           audioBtn.classList.remove('border-limeAccent', 'text-limeAccent');
         }
       } catch (err) {
@@ -1462,7 +1516,7 @@
     });
 
     /* ==========================================================
-       8. SMOOTH INDEX -> 'X' CLOSE & WHITE DRAFTING BOARD INTERACTION
+       5. RESPONSIVE INDEX -> 'X' CLOSE & DRAFTING BOARD
        ========================================================== */
     const menuBtn = document.getElementById('menu-btn');
     const menuLabel = document.getElementById('menu-label-text');
@@ -1477,34 +1531,26 @@
       isMenuOpen = !isMenuOpen;
       
       if (isMenuOpen) {
-        // Morph button into neon 'X' & change label to CLOSE smoothly
         menuBtn.classList.add('is-active');
         menuLabel.textContent = 'CLOSE';
-
-        // Slide navigation overlay in
         navOverlay.classList.remove('-translate-y-full');
         document.body.style.overflow = 'hidden';
         lenis.stop();
 
-        // Reveal Drawing Board White Paper Sheet
         drawingBoard.classList.add('active');
         sheetPhotoEl.classList.remove('is-active');
 
-        // GSAP Nav Links Entrance
         gsap.fromTo('.nav-link', 
-          { y: 60, opacity: 0 }, 
-          { y: 0, opacity: 1, stagger: 0.06, duration: 0.6, ease: 'power3.out', delay: 0.2 }
+          { y: 50, opacity: 0 }, 
+          { y: 0, opacity: 1, stagger: 0.05, duration: 0.5, ease: 'power3.out', delay: 0.15 }
         );
 
         if (isAudioActive && synth) {
           synth.triggerAttackRelease(['F#4', 'A#4', 'C#5'], '16n');
         }
       } else {
-        // Revert 'X' back to 3 bars & label back to INDEX
         menuBtn.classList.remove('is-active');
         menuLabel.textContent = 'INDEX';
-
-        // Dismiss overlay and drawing board
         navOverlay.classList.add('-translate-y-full');
         drawingBoard.classList.remove('active');
         sheetPhotoEl.classList.remove('is-active');
@@ -1519,33 +1565,43 @@
 
     menuBtn.addEventListener('click', toggleMenu);
 
-    // Interactive Image Swap on Paper when hovering over Nav links
-    navLinks.forEach((link) => {
-      link.addEventListener('mouseenter', () => {
-        const newImg = link.getAttribute('data-sheet-img');
-        if (newImg && sheetPhotoEl) {
-          sheetPhotoEl.style.backgroundImage = `url('${newImg}')`;
-          sheetPhotoEl.classList.add('is-active');
-        }
-
-        // Tactile paper reaction
+    // Interactive Photo Reveal supporting both Hover (Desktop) & Touch (Mobile/Tablet)
+    function activateSheetPreview(imgUrl) {
+      if (imgUrl && sheetPhotoEl) {
+        sheetPhotoEl.style.backgroundImage = `url('${imgUrl}')`;
+        sheetPhotoEl.classList.add('is-active');
+      }
+      if (!isTouchDevice && drawingSheetEl) {
         gsap.to(drawingSheetEl, {
-          rotate: (Math.random() - 0.5) * 2.2,
+          rotate: (Math.random() - 0.5) * 2,
           scale: 1.015,
           duration: 0.45,
           ease: 'power2.out'
         });
-      });
+      }
+    }
 
-      link.addEventListener('mouseleave', () => {
-        sheetPhotoEl.classList.remove('is-active');
+    function deactivateSheetPreview() {
+      sheetPhotoEl.classList.remove('is-active');
+      if (!isTouchDevice && drawingSheetEl) {
         gsap.to(drawingSheetEl, {
           rotate: -0.5,
           scale: 1,
           duration: 0.5,
           ease: 'power2.out'
         });
-      });
+      }
+    }
+
+    navLinks.forEach((link) => {
+      const imgUrl = link.getAttribute('data-sheet-img');
+      
+      // Desktop hover
+      link.addEventListener('mouseenter', () => activateSheetPreview(imgUrl));
+      link.addEventListener('mouseleave', deactivateSheetPreview);
+
+      // Mobile/Tablet touch
+      link.addEventListener('touchstart', () => activateSheetPreview(imgUrl), { passive: true });
 
       link.addEventListener('click', (e) => {
         const targetId = link.getAttribute('href');
@@ -1554,7 +1610,7 @@
           const targetEl = document.querySelector(targetId);
           if (targetEl) {
             setTimeout(() => {
-              lenis.scrollTo(targetEl, { offset: 0, duration: 1.5 });
+              lenis.scrollTo(targetEl, { offset: 0, duration: 1.2 });
             }, 350);
           }
         }
@@ -1562,7 +1618,7 @@
     });
 
     /* ==========================================================
-       9. GSAP SCROLLTRIGGER & COUNTER ANIMATIONS
+       6. GSAP SCROLLTRIGGER & STAT COUNTERS
        ========================================================== */
     gsap.registerPlugin(ScrollTrigger);
 
@@ -1570,7 +1626,7 @@
       const target = +counter.getAttribute('data-target');
       ScrollTrigger.create({
         trigger: counter,
-        start: 'top 85%',
+        start: 'top 90%',
         once: true,
         onEnter: () => {
           gsap.to(counter, {
@@ -1583,21 +1639,23 @@
       });
     });
 
-    document.querySelectorAll('.project-img').forEach((img) => {
-      gsap.to(img, {
-        yPercent: 12,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: img.parentElement,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1
-        }
+    if (!isTouchDevice) {
+      document.querySelectorAll('.project-img').forEach((img) => {
+        gsap.to(img, {
+          yPercent: 10,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: img.parentElement,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1
+          }
+        });
       });
-    });
+    }
 
     /* ==========================================================
-       10. PRELOADER INITIALIZATION
+       7. PRELOADER INITIALIZATION
        ========================================================== */
     const preloader = document.getElementById('preloader');
     const loaderBar = document.getElementById('loader-progress-bar');
@@ -1605,7 +1663,7 @@
 
     let currentProgress = 0;
     const interval = setInterval(() => {
-      currentProgress += Math.floor(Math.random() * 18) + 8;
+      currentProgress += Math.floor(Math.random() * 20) + 10;
       if (currentProgress > 100) currentProgress = 100;
 
       if (loaderBar) loaderBar.style.width = `${currentProgress}%`;
@@ -1616,21 +1674,21 @@
         setTimeout(() => {
           gsap.to(preloader, {
             yPercent: -100,
-            duration: 1.0,
+            duration: 0.9,
             ease: 'power4.inOut',
             onComplete: () => {
               preloader.style.display = 'none';
               preloader.style.pointerEvents = 'none';
 
               gsap.fromTo('.hero-char-anim', 
-                { y: 100, opacity: 0 }, 
-                { y: 0, opacity: 1, duration: 1.1, stagger: 0.15, ease: 'power4.out' }
+                { y: 80, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 1.0, stagger: 0.12, ease: 'power4.out' }
               );
             }
           });
-        }, 200);
+        }, 150);
       }
-    }, 40);
+    }, 35);
   </script>
 </body>
 </html>
