@@ -1,4 +1,4 @@
-# NOIR / FRAME — Haute Photography & Creative Studio
+<img width="1902" height="907" alt="image" src="https://github.com/user-attachments/assets/4105ad2e-4f44-45ca-b12b-a1ae09caa36f" /># NOIR / FRAME — Haute Photography & Creative Studio
 
 <p align="center">
   <strong>An Awwwards-caliber, responsive digital experience bridging spatial photography, GLSL shader art, and tactile user interface engineering.</strong>
@@ -25,6 +25,15 @@
 
 Experience the live interactive build directly in your browser:  
 👉 **[https://manikar984.github.io/animated-photography-website/](https://manikar984.github.io/animated-photography-website/)**
+
+<p align="center">
+  <img 
+    width="1902" 
+    height="907" 
+    alt="NOIR / FRAME — Photography & Creative Studio" 
+    src="https://github.com/user-attachments/assets/4105ad2e-4f44-45ca-b12b-a1ae09caa36f" 
+  />
+</p>
 
 ---
 
